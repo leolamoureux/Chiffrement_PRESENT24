@@ -29,4 +29,5 @@ typedef struct boite_s BOITE_S;
 char *chiffrement(char *message, char *cle);
 char *substitution(char *message);
 char *permutation(char *message);
+char  XOR(int a, int b);
 void boite_s(int bit1,int bit2, int bit3, int bit4);
