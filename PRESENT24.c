@@ -20,7 +20,7 @@ char *hexa_vers_bits(char *string){
 
     char *new=malloc(24*sizeof(char));
     
-    for(int i=0;i<6;i++){
+    for(int i=0;i<strlen(string);i++){
         for(int j=0;j<16;j++){
              if (string[i]==dico_hexa[j]) strcat(new,dico_bits[j]);
         }
@@ -33,7 +33,7 @@ char *bits_vers_hexa(char *string){
     char *new=malloc(6*sizeof(char));
     char temp[4];
     int cmpt=0;
-    for(int i=0;i<6;i++){
+    for(int i=0;i<strlen(string);i++){
         for(int j=cmpt;j<cmpt+4;j++){
              temp[j-cmpt]=string[j];
         }
@@ -57,11 +57,6 @@ char XOR(int a, int b){
     return d;
 }
 
-char *chiffrement(char *message, char *cle){
-    
-
-    return message;
-}
 
 char *substitution(char *message){
 
@@ -102,5 +97,24 @@ char *permutation(char *message){
 
     /*on reconvertit le message en hexa*/
     message=bits_vers_hexa(message);
+    return message;
+}
+
+char *cadencement(char *cle){
+    char *regK;
+    char temp[80];
+    cle=hexa_vers_bits(cle);
+    strcat(temp,cle);
+    for(int i=strlen(cle);i<80;i++){temp[i]='0';}
+    regK=bits_vers_hexa(temp);
+
+    
+
+    return cle;
+}
+
+char *chiffrement(char *message, char *cle){
+
+
     return message;
 }

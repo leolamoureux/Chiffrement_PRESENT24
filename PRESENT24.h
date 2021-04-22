@@ -6,6 +6,7 @@
 ////////////////Listes des fonctions////////////////
 
 char *chiffrement(char *message, char *cle);
+char *cadencement(char *cle);
 char *substitution(char *message);
 char *permutation(char *message);
 char  XOR(int a, int b);
