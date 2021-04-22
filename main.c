@@ -6,7 +6,7 @@ int  main (int argc, char *argv[]) {
 
     
     char *message="f955b9";
-    char *message2 = permutation(message);
+    char *message2 = substitution(message);
     printf("message2= %s\n",message2);
 
     return 0;

@@ -1,6 +1,6 @@
 #include "PRESENT24.h"
 
-////////////dictionnaire bits et hexadécimal////////////////
+/////////////////////dictionnaires//////////////////////////
 
 char *dico_bits[16]={"0000","0001","0010","0011",
     "0100","0101","0110","0111","1000","1001","1010",
@@ -9,6 +9,10 @@ char *dico_bits[16]={"0000","0001","0010","0011",
 char dico_hexa[16]={'0','1','2','3','4','5',
                     '6','7','8','9',
                     'a','b','c','d','e','f'};
+
+char boite_s[16]={'c','5','6','b','9','0',
+                    'a','d','3','e',
+                    'f','8','4','7','1','2'};
 ////////////////////////////////////////////////////////////
 
 
@@ -61,6 +65,19 @@ char *chiffrement(char *message, char *cle){
 
 char *substitution(char *message){
 
+    char temp[16];
+
+    for (int i=0;i<strlen(message);i++){
+        temp[i]=message[i]; 
+    }
+
+    for(int j=0;j<strlen(message);j++){
+        for (int i=0;i<16;i++){
+            if(message[j]==dico_hexa[i])temp[j]=boite_s[i];
+        }
+    }
+
+    message=temp;
     return message;
 }
 
@@ -71,13 +88,13 @@ char *permutation(char *message){
 
     /*tableau des permutations*/
     int permutation[24]={0,6,12,18,1,7,13,19,2,8,14,20,3,9,15,21,4,10,16,22,5,11,17,23};
-    char temp[24];
+    char temp[strlen(message)];
     /*on charge la chaine de caractère message dans le tableau de caractère temp*/
-    for (int i=0;i<24;i++){
+    for (int i=0;i<strlen(message);i++){
         temp[i]=message[i]; 
     }
     /*on permute dans le tableau temp*/
-    for (int i=0;i<24;i++){
+    for (int i=0;i<strlen(message);i++){
         temp[i]=temp[permutation[i]];
     }
     /*la chaine de caractère message prend les valeur du tableau temp*/
