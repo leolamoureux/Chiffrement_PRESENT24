@@ -106,9 +106,23 @@ char *cadencement(char *cle){
     cle=hexa_vers_bits(cle);
     strcat(temp,cle);
     for(int i=strlen(cle);i<80;i++){temp[i]='0';}
-    regK=bits_vers_hexa(temp);
+    //regK=bits_vers_hexa(temp);
 
-    
+    char *K[11]; /*tableau qui contiendra les 11 sous-clés*/
+    /*algo*/
+    for(int i=0;i<11;i++){
+        for(int j=16;j<=39;j++){
+            K[i]=K[i]+temp[j];
+        }
+        /*étape 1*/
+        for(int cmp=0;cmp<61;cmp++){
+            temp[cmp]=temp[cmp+1];
+            temp[0]=cmp;
+        }
+        /*étape 2*/
+        char *s;
+        
+    }
 
     return cle;
 }
