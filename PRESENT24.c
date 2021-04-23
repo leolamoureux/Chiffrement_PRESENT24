@@ -101,8 +101,8 @@ char *permutation(char *message){
 }
 
 char *cadencement(char *cle){
-    char *regK;
-    char temp[80];
+
+    char temp[80];/*registre temporaire = registre K */
     cle=hexa_vers_bits(cle);
 
     /*on met la clé en fin de chaine */
@@ -122,6 +122,12 @@ char *cadencement(char *cle){
         }
 
         /*étape 1 : pivot de 61 positions*/
+        char *C=bits_vers_hexa(temp);
+        long int ent=strtol(C,NULL,16);
+        int d=ent<<61;
+        
+        
+        
         
         
 
