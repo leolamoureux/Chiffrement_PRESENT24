@@ -100,7 +100,7 @@ char *permutation(char *message){
     return message;
 }
 
-char *cadencement(char *cle){
+CLES cadencement(char *cle){
 
     char temp[80];/*registre temporaire = registre K */
     cle=hexa_vers_bits(cle);
@@ -111,15 +111,18 @@ char *cadencement(char *cle){
     /*on met les 56 bits restants à 0*/
     for(int i=strlen(cle);i<80;i++){strcat(temp,"0");}
 
-    char K[11][24]; /*tableau qui contiendra les 11 sous-clés de 24 bits*/
-
+    CLES k; /*structure qui contiendra les 11 sous-clés de 24 bits*/
+/////////////////////////////ICI LOLA/////////////////////////
     /*algo*/
-    for(int tour=0;tour<2;tour++){
-
+    for(int tour=0;tour<5;tour++){
     /* constitution de la sous clé K[i] */
-        for(int j=16;j<=39;j++){
-           K[tour][j-16]=temp[j];
+        for(int j=41;j<=64;j++){
+           k.K[tour][j-41]=temp[j];
         }
+/* marche bien pour les 4 premiers tours mais apres rempli la fin
+de K avec des symbole chelous je sais pas pq*/        
+///////////////////////////ICI LOLA//////////////////////////
+        printf("k[%d]=%s\n",tour,k.K[tour]);
         /*étape 1 : pivot de 61 positions*/
         char save[strlen(temp)];
         /* on sauvegarde le registre dans save */
@@ -152,8 +155,8 @@ char *cadencement(char *cle){
             temp[i]=XOR(a,b);/*a chaque iteration on XOR le bit de temp et le bit du tour actuel*/
         }
     }
-
-    return cle;
+    
+    return k;
 }
 
 char *chiffrement(char *message, char *cle){

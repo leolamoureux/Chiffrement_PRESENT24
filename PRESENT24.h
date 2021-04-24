@@ -3,10 +3,17 @@
 # include  <string.h>
 
 
+/////structure pour les 11 clés de cadencement/////
+typedef struct cle{
+    char K[11][24];
+}CLES;
+///////////////////////////////////////////////////
+
+
 ////////////////Listes des fonctions////////////////
 
 char *chiffrement(char *message, char *cle);
-char *cadencement(char *cle);
+CLES cadencement(char *cle);
 char *substitution(char *message);
 char *permutation(char *message);
 char  XOR(int a, int b);
