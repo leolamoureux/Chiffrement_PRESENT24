@@ -7,6 +7,5 @@ int  main (int argc, char *argv[]) {
     char *message="f955b9";
     char *message2 = cadencement(message);
     printf("message2= %s\n",message2);
-
     return 0;
 }

@@ -53,7 +53,7 @@ char XOR(int a, int b){
     int c = a ^ b;
     char d;
     if (c==0)d='0';
-    if (c==0)d='1';
+    if (c==1)d='1';
     return d;
 }
 
@@ -114,11 +114,11 @@ char *cadencement(char *cle){
     char K[11][24]; /*tableau qui contiendra les 11 sous-clés de 24 bits*/
 
     /*algo*/
-    for(int i=0;i<1;i++){
+    for(int tour=0;tour<2;tour++){
 
     /* constitution de la sous clé K[i] */
         for(int j=16;j<=39;j++){
-           K[i][j-16]=temp[j];
+           K[tour][j-16]=temp[j];
         }
         /*étape 1 : pivot de 61 positions*/
         char save[strlen(temp)];
@@ -144,10 +144,13 @@ char *cadencement(char *cle){
         for(int i=0;i<4;i++){
             temp[i]=sub[i];/*on remplace les valeurs dans temp*/
         }
-
-
-
-        
+        /*étape 3: XOR*/
+        char *d=dico_bits[tour];/*valeur du tour en bit pour le XOR*/
+        for(int i=61;i<=65;i++){
+            int a=(int)temp[i]-48;
+            int b=(int)d[i-61]-48;
+            temp[i]=XOR(a,b);/*a chaque iteration on XOR le bit de temp et le bit du tour actuel*/
+        }
     }
 
     return cle;
