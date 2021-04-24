@@ -114,13 +114,12 @@ char *cadencement(char *cle){
     char K[11][24]; /*tableau qui contiendra les 11 sous-clés de 24 bits*/
 
     /*algo*/
-    for(int i=0;i<3;i++){
+    for(int i=0;i<1;i++){
 
     /* constitution de la sous clé K[i] */
         for(int j=16;j<=39;j++){
            K[i][j-16]=temp[j];
         }
-        printf("temp avant rotation=%s\n",temp);
         /*étape 1 : pivot de 61 positions*/
         char save[strlen(temp)];
         /* on sauvegarde le registre dans save */
@@ -134,17 +133,20 @@ char *cadencement(char *cle){
         for(int i=0;i<60;i++){
             temp[i]=save[i+20];
         }
-       printf("temp après rotation=%s\n",temp);
-        
-
-        
-        
-        
-        
-        
-
         /*étape 2 : application boite_S aux 4 bits les plus a gauche*/
-        
+        char *sub=malloc(4*sizeof(char));
+        for(int i=0;i<4;i++){
+            sub[i]=temp[i];/*on met les 4 bits les plus a gauche dans une chaine temporaire*/
+        }
+        sub=bits_vers_hexa(sub);/*on convertit en hexadecimal*/
+        sub=substitution(sub);/*on applique la substitution sur le code hexa*/
+        sub=hexa_vers_bits(sub);/*on reconvertit en bit*/
+        for(int i=0;i<4;i++){
+            temp[i]=sub[i];/*on remplace les valeurs dans temp*/
+        }
+
+
+
         
     }
 
