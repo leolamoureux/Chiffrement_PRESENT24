@@ -112,17 +112,13 @@ CLES cadencement(char *cle){
     for(int i=strlen(cle);i<80;i++){strcat(temp,"0");}
 
     CLES k; /*structure qui contiendra les 11 sous-clés de 24 bits*/
-/////////////////////////////ICI LOLA/////////////////////////
     /*algo*/
-    for(int tour=0;tour<5;tour++){
+    for(int tour=0;tour<11;tour++){
     /* constitution de la sous clé K[i] */
         for(int j=41;j<=64;j++){
+           if(j==64){k.K[tour][j-40]='\0'; }
            k.K[tour][j-41]=temp[j];
         }
-/* marche bien pour les 4 premiers tours mais apres rempli la fin
-de K avec des symbole chelous je sais pas pq*/        
-///////////////////////////ICI LOLA//////////////////////////
-        printf("k[%d]=%s\n",tour,k.K[tour]);
         /*étape 1 : pivot de 61 positions*/
         char save[strlen(temp)];
         /* on sauvegarde le registre dans save */
