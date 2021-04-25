@@ -57,6 +57,16 @@ char XOR(int a, int b){
     return d;
 }
 
+char *XOR_string(char *a,char *b){
+    char *tab=malloc(sizeof(a));
+    for(int i=0;i<strlen(a);i++){
+        int c=(int)a[i]-48;
+        int d=(int)b[i]-48;
+        tab[i]=XOR(c,d);
+    }
+    return tab;
+}
+
 
 char *substitution(char *message){
 
@@ -113,12 +123,16 @@ CLES cadencement(char *cle){
 
     CLES k; /*structure qui contiendra les 11 sous-clés de 24 bits*/
     /*algo*/
-    for(int tour=0;tour<11;tour++){
+    for(int tour=1;tour<=11;tour++){
     /* constitution de la sous clé K[i] */
         for(int j=41;j<=64;j++){
            if(j==64){k.K[tour][j-40]='\0'; }
            k.K[tour][j-41]=temp[j];
         }
+        char *e=malloc(24*sizeof(char));
+        e=bits_vers_hexa(k.K[tour]);
+        printf("k=%s\n",e);
+        
         /*étape 1 : pivot de 61 positions*/
         char save[strlen(temp)];
         /* on sauvegarde le registre dans save */
@@ -155,8 +169,17 @@ CLES cadencement(char *cle){
     return k;
 }
 
-char *chiffrement(char *message, char *cle){
-
-
+char *chiffrement(char *message,CLES k){
+    printf("message=%s\n",message);
+    for(int i=1;i<=10;i++){
+        message=hexa_vers_bits(message);
+        message=XOR_string(message,k.K[i]);
+        message=bits_vers_hexa(message);
+        message=substitution(message);
+        message=permutation(message);
+    }
+    message=hexa_vers_bits(message);;
+    message=XOR_string(message,k.K[11]);
+    message=bits_vers_hexa(message);
     return message;
 }

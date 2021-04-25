@@ -5,18 +5,19 @@
 
 /////structure pour les 11 clés de cadencement/////
 typedef struct cle{
-    char K[11][24];
+    char K[13][24];
 }CLES;
 ///////////////////////////////////////////////////
 
 
 ////////////////Listes des fonctions////////////////
 
-char *chiffrement(char *message, char *cle);
+char *chiffrement(char *message, CLES k);
 CLES cadencement(char *cle);
 char *substitution(char *message);
 char *permutation(char *message);
 char  XOR(int a, int b);
+char *XOR_string(char *a,char *b);
 
 /*conversions*/
 char *hexa_vers_bits(char *string); /*convertir un message en hexadécimal en un message en bits*/
