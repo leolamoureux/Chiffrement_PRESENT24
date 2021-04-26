@@ -1,8 +1,8 @@
 #include "PRESENT24.h"
 
 int  main (int argc, char *argv[]) {
-    unsigned int message[24]={0,1,0,1,0,0,0,1,1,1,0,0,1,0,1,0,1,1,0,1,0,1,0,1};
-    unsigned int cle[24]={0,1,0,1,0,0,0,1,1,1,0,0,1,0,1,0,1,1,0,1,0,1,0,1};
+    unsigned int message[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    unsigned int cle[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     CLES k=cadencement(cle);
     chiffrement(message,k);
     /////////////les 11 clés en bits///////////////////////
@@ -19,7 +19,6 @@ int  main (int argc, char *argv[]) {
             printf("%d",message[j]);
         }
         printf("\n");
-
 
     return 0;
 }
