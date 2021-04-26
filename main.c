@@ -1,13 +1,25 @@
 #include "PRESENT24.h"
 
 int  main (int argc, char *argv[]) {
-
-    //printf("message : %s, clé : %s\n",argv[1],argv[2]);
-    char *message="000000";
-    char *cle="000000";
+    unsigned int message[24]={0,1,0,1,0,0,0,1,1,1,0,0,1,0,1,0,1,1,0,1,0,1,0,1};
+    unsigned int cle[24]={0,1,0,1,0,0,0,1,1,1,0,0,1,0,1,0,1,1,0,1,0,1,0,1};
     CLES k=cadencement(cle);
-    message = chiffrement(message,k);
-    printf("message chiffré = %s\n",message);
+    chiffrement(message,k);
+    /////////////les 11 clés en bits///////////////////////
+    for(int i=0;i<11;i++){
+        printf("k=");
+        for(int j=0;j<24;j++){
+            printf("%d",k.K[i][j]);
+        }
+        printf("\n");
+    }
+    ////////////////////////////////////////////////
+        printf("message chiffré = ");
+        for(int j=0;j<24;j++){
+            printf("%d",message[j]);
+        }
+        printf("\n");
+
 
     return 0;
 }
