@@ -1,21 +1,21 @@
 #include "PRESENT24.h"
 ////////////////////// dictionnaires //////////////////////////////
-unsigned int bits_tab[16][4]={{0,0,0,0},
-                              {0,0,0,1},
-                              {0,0,1,0},
-                              {0,0,1,1},
-                              {0,1,0,0},
-                              {0,1,0,1},
-                              {0,1,1,0},
-                              {0,1,1,1},
-                              {1,0,0,0},
-                              {1,0,0,1},
-                              {1,0,1,0},
-                              {1,0,1,1},
-                              {1,1,0,0},
-                              {1,1,0,1},
-                              {1,1,1,0},
-                              {1,1,1,1}};
+unsigned int bits_tab[16][4]={{0,0,0,0},//0
+                              {0,0,0,1},//1
+                              {0,0,1,0},//2
+                              {0,0,1,1},//3
+                              {0,1,0,0},//4
+                              {0,1,0,1},//5
+                              {0,1,1,0},//6
+                              {0,1,1,1},//7
+                              {1,0,0,0},//8
+                              {1,0,0,1},//9
+                              {1,0,1,0},//a
+                              {1,0,1,1},//b
+                              {1,1,0,0},//c
+                              {1,1,0,1},//d
+                              {1,1,1,0},//e
+                              {1,1,1,1}};//f
 
 unsigned int boite_S[16][4]={{1,1,0,0},//c
                              {0,1,0,1},//5
@@ -45,9 +45,21 @@ void permutation(unsigned int message[24]){
     }
 }
 
+int comparaison_tableaux(int tab[], int k){
+    for(int i=0; i<4; i++) {
+       if (tab[i]!=bits_tab[k][i]) return 0;
+    }
+     return 1;
+}
+
 void sub_4bits(unsigned int message[4]){
-    for(int i=0;i<16;i++){
-        if (message==bits_tab[i])message=boite_S[i];
+    for(int i=0; i<16; i++){
+        if (comparaison_tableaux(message,i) == 1){
+            for(int j=0; j<4; j++){
+                message[j]=boite_S[i][j];
+            }
+            break;
+        }
     }
 }
 
@@ -58,11 +70,11 @@ void substitution(unsigned int message[24]){
         for(int j=0;j<4;j++){
                 temp[j]=message[i+j];/*separe message en 6 parts de 4 bits dans une variable temporaire*/
         }
-        i+=4;
         sub_4bits(temp);/*fais la substitution sur chaque var temporaire*/
         for(int j=0;j<4;j++){
                 message[i+j]=temp[j];/*remplace les 4 bits substitués dans le message*/
         }
+        i+=3;
     }
 }
 

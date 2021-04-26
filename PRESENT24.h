@@ -16,4 +16,5 @@ void substitution(unsigned int message[24]);
 void sub_4bits(unsigned int message[4]);
 CLES cadencement(unsigned int cle[24]);
 void chiffrement(unsigned int message[24],CLES k);
+int comparaison_tableaux(int tab[], int k);
 //////////////////////////////
