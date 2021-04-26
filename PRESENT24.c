@@ -78,6 +78,15 @@ void substitution(unsigned int message[24]){
     }
 }
 
+void rotation(int tab[80]){
+    int tmp = tab[79];/*on sauvegarde tab[79]*/
+    for(int i=79;i>=0;i--){
+        tab[i-1] = tab[i];/*on decale tout de 1 vers la gauche*/
+    }
+    tab[0] = tmp;/*on attribut tab[79] au premier element duu tableau=rotation*/
+}
+
+
 CLES cadencement(unsigned int cle[24]){
     CLES cles;
     unsigned int regTemp[80];
@@ -99,11 +108,8 @@ CLES cadencement(unsigned int cle[24]){
             save[i]=regTemp[i];/* on sauvegardera le registre dans save */
         }
         /*pivot*/
-        for(int i=0;i<19;i++){
-            regTemp[i+61]=regTemp[i];
-        }
-        for(int i=0;i<60;i++){
-            regTemp[i]=save[i+20];
+        for(int i=0;i<61;i++){
+            rotation(regTemp);/*61 décalage de 1 position*/
         }
         //////////////////////////////////////////////////////////////////////
 
