@@ -78,12 +78,12 @@ void substitution(unsigned int message[24]){
     }
 }
 
-void rotation(int tab[80]){
-    int tmp = tab[79];/*on sauvegarde tab[79]*/
-    for(int i=79;i>=0;i--){
-        tab[i-1] = tab[i];/*on decale tout de 1 vers la gauche*/
+void rotation(unsigned int tab[80]){
+    int i, tmp = tab[79];
+    for(i=79;i>0;i--){
+        tab[i] = tab[i - 1];
     }
-    tab[0] = tmp;/*on attribut tab[79] au premier element duu tableau=rotation*/
+    tab[0] = tmp;
 }
 
 
@@ -103,7 +103,7 @@ CLES cadencement(unsigned int cle[24]){
             cles.K[tour-1][39-i]=regTemp[i];/*  constitution de la sous clé Ki-1(de 0 à 10)  */
         }
         ///////////////////*étape 1 : pivot de 61 positions*///////////////////
-        int save[80]; 
+        unsigned int save[80]; 
         for(int i=0;i<80;i++){
             save[i]=regTemp[i];/* on sauvegardera le registre dans save */
         }
