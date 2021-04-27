@@ -35,13 +35,17 @@ unsigned int boite_S[16][4]={{1,1,0,0},//c
                              {0,0,1,0}};//2
 
 int permutation_tab[24]={0,6,12,18,1,7,13,19,2,8,14,20,
-                     3,9,15,21,4,10,16,22,5,11,17,23};
+                         3,9,15,21,4,10,16,22,5,11,17,23};
 /////////////////////////////////////////////////////////////////////
 
 
 void permutation(unsigned int message[24]){
+    unsigned int save[24];
     for(int i=0;i<24;i++){
-        message[i]=message[permutation_tab[i]];
+        save[i]=message[23-i]; /* save ← message */
+    }
+    for(int i=0;i<24;i++){
+        message[permutation_tab[23-i]]=save[i];
     }
 }
 
@@ -140,14 +144,23 @@ CLES cadencement(unsigned int cle[24]){
 }
 
 void chiffrement(unsigned int message[24],CLES k){
-    for(int i=1;i<=10;i++){
-        for(int j=0;j<24;j++){
-            message[j]=message[j] ^ k.K[i][j];/*XOR bit à bit du message et de la clé Ki*/
-        }
-        substitution(message);
-        permutation(message);
+    unsigned int etat[24];
+    for(int i=0;i<24;i++){
+        etat[i]=message[i]; /* Etat ← m */
     }
-    for(int x=0;x<24;x++){
-             message[x]=message[x] ^ k.K[10][x];/*XOR bit à bit du message et de la clé Ki*/
+    for(int i=1;i<=10;i++){ /* pour i = 1 jusqu’a 10 faire */
+        for(int j=0;j<24;j++){
+            etat[j]=etat[j] ^ k.K[i-1][j];/* Etat ← Etat ⊕ Ki*/
         }
+        substitution(etat); /* Etat ← Substitution(Etat)*/
+        permutation(etat);  /* Etat ← Permutation(Etat) */
+    }
+    for(int x=0;x<24;x++){ /*etat XOR K11*/
+             etat[x]=etat[x] ^ k.K[10][x];/* Etat ← Etat ⊕ K11 */
+        }
+    
+    for(int i=0;i<24;i++){
+        message[i]=etat[i]; /*c(message) ← Etat */
+    }
+    /*retourne message*/
 }
