@@ -2,7 +2,10 @@ CFLAGS = -Wall -g
 CC = gcc
 
 run : clean chiffrer
-	./chiffrer abcf00 000000
+	./chiffrer 000000 000000
+	./chiffrer ffffff 000000
+	./chiffrer 000000 ffffff
+	./chiffrer f955b9 d1bd2d 
 
 chiffrer : main.o PRESENT24.o
 	$(CC) main.o PRESENT24.o -o chiffrer
