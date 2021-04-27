@@ -1,5 +1,6 @@
 #include "PRESENT24.h"
-////////////////////// dictionnaires //////////////////////////////
+///////__________________dictionnaires__________________________///////////
+
 unsigned int bits_tab[16][4]={{0,0,0,0},//0
                               {0,0,0,1},//1
                               {0,0,1,0},//2
@@ -36,8 +37,9 @@ unsigned int boite_S[16][4]={{1,1,0,0},//c
 
 int permutation_tab[24]={0,6,12,18,1,7,13,19,2,8,14,20,
                          3,9,15,21,4,10,16,22,5,11,17,23};
-/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////_____________________________CHIFFREMENT_______________________________________________///////////////////////////////////////////////
 
 void permutation(unsigned int message[24]){
     unsigned int save[24];
@@ -164,3 +166,24 @@ void chiffrement(unsigned int message[24],CLES k){
     }
     /*retourne message*/
 }
+//////////////////////////////////////////////////////////////////////////////////
+
+///////_______________________________CONVERSION______________________________/////////////////////////
+void bits_to_hexa(unsigned int message[24]){
+
+}
+void hexa_to_bits(char *mot_hexa,unsigned int message_destination[24]){
+    int tab[6];
+    for(int i=0;i<6;i++){/*on convertit les caractères en entiers qu'on place dans tab*/
+        if(mot_hexa[i]>=97){tab[i]=mot_hexa[i]-87;}/*si c'est une lettre*/
+        else{tab[i]=mot_hexa[i]-48;}/*si c'est un chiffre entre 0 et 9*/
+    }
+    for(int i=0;i<6;i++){
+        for(int j=4*i;j<(4*i+4);j++){
+            message_destination[j]=bits_tab[tab[i]][j-(i*4)];
+        }
+    }
+    
+
+}
+//////////////////////////////////////////////////////////////////////////
