@@ -127,8 +127,9 @@ CLES cadencement(unsigned int cle[24]){
         //////////////////////////////////////////////////////////////////////
 
         ///////////////////////////*étape 3: XOR*/////////////////////////////
-        unsigned int tour_en_bits[4];
-        for(int i=0;i<4;i++){tour_en_bits[i]=bits_tab[tour][i];}/*on convertit la valeur du tour en bits*/
+        unsigned int tour_en_bits[5];
+        for(int i=1;i<5;i++){tour_en_bits[i]=bits_tab[tour][i-1];}/*on convertit la valeur du tour en bits*/
+        tour_en_bits[0]=0;/*le premier bit à 0*/
         for(int i=19;i>=15;i--){
             regTemp[i]=regTemp[i] ^ tour_en_bits[19-i];/*XOR bit à bit*/
         }
