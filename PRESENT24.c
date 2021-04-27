@@ -37,6 +37,8 @@ unsigned int boite_S[16][4]={{1,1,0,0},//c
 
 int permutation_tab[24]={0,6,12,18,1,7,13,19,2,8,14,20,
                          3,9,15,21,4,10,16,22,5,11,17,23};
+
+char hexa_tab[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////_____________________________CHIFFREMENT_______________________________________________///////////////////////////////////////////////
@@ -169,8 +171,24 @@ void chiffrement(unsigned int message[24],CLES k){
 //////////////////////////////////////////////////////////////////////////////////
 
 ///////_______________________________CONVERSION______________________________/////////////////////////
-void bits_to_hexa(unsigned int message[24]){
-
+void bits_to_hexa(unsigned int message[24], char *mot_hexa_destination){
+    unsigned int temp[4];
+    int tab[6];
+    for(int i=0;i<24;i++){
+        for(int j=0;j<4;j++){
+                temp[j]=message[i+j];/*separe message en 6 parts de 4 bits dans une variable temporaire*/
+        }
+        for(int x=0; x<16; x++){
+            if (comparaison_tableaux(temp,x) == 1){/*on cherche a quelle valeur decimal correspond le code en bit*/
+                tab[i/4]=x;/*on met les valeur decimales dans le tableau*/
+                break;
+            }
+        }
+        i+=3;
+    }
+    for(int i=0;i<6;i++){
+        mot_hexa_destination[i]=hexa_tab[tab[i]];/*on convertir en char et on met dans le mot hexa*/
+    }
 }
 void hexa_to_bits(char *mot_hexa,unsigned int message_destination[24]){
     int tab[6];

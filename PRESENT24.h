@@ -18,6 +18,6 @@ int comparaison_tableaux(int tab[], int k);/*fonction utilisé pour la substitut
 /////////////////////////////////////////////
 
 //////////fonctions de conversion////////////
-void bits_to_hexa(unsigned int message[24]);/*convertir un message de 24bits en un message en hexa*/
+void bits_to_hexa(unsigned int message[24],char *mot_hexa_destination);/*convertir un message de 24bits en un message en hexa*/
 void hexa_to_bits(char *mot_hexa,unsigned int message_destination[24]);/*convertir un message en hexa en un message de 24 bits*/
 /////////////////////////////////////////////

@@ -1,9 +1,10 @@
 #include "PRESENT24.h"
 
 int  main (int argc, char *argv[]) {
-
+    char *test2=malloc(6*sizeof(char));
     unsigned int test[24];
     hexa_to_bits(argv[1],test);
+    bits_to_hexa(test,test2);
     //unsigned int message[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     //unsigned int cle[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     //CLES k=cadencement(cle);
