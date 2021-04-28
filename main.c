@@ -3,8 +3,8 @@
 int  main (int argc, char *argv[]) {
 /*________________________________________CHIFFREMENT_____________________________________*/
     printf("----------------------------\n");
-    printf("message=%s\n",argv[1]);
-    printf("clé=%s\n",argv[2]);
+    printf("message = %s\n",argv[1]);
+    printf("clé = %s\n",argv[2]);
     unsigned int message[24];
     unsigned int cle[24];
     hexa_to_bits(argv[1],message);
@@ -14,13 +14,18 @@ int  main (int argc, char *argv[]) {
     chiffrement(message,k);/*on chiffre le message avec les 11 clés*/
     bits_to_hexa(message,message_chiffre);/*on convertit ce message en bits en un message en hexa*/
     printf("=\n");
-    printf("message chiffré=%s\n",message_chiffre);
+    printf("message chiffré = %s\n",message_chiffre);
     printf("----------------------------\n");
 /*___________________________________________________________________________________________*/
 
 
 /*_______________________________________DECHIFFREMENT______________________________________________*/
-
+    char *message_dechiffre=malloc(6*sizeof(char));
+    dechiffrement(message,k);
+    bits_to_hexa(message,message_dechiffre);/*on convertit ce message en bits en un message en hexa*/
+    printf("=\n");
+    printf("message déchiffré = %s\n",message_dechiffre);
+    printf("----------------------------\n");
 /*__________________________________________________________________________________________________*/
     return 0;
 }
