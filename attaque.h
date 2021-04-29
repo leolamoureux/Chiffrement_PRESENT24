@@ -3,6 +3,18 @@
 #include  <string.h>
 #include  <math.h>
 
+typedef struct ListeM{
+    unsigned int *message_clair;
+    unsigned int *cle;
+}ListeM;
+
+typedef struct ListeC{
+    unsigned int *message_chiffre;
+    unsigned int *cle;
+}ListeC;
 
 /*fonctions*/
-void comparaison_listes(unsigned int message_clair[24], unsigned int message_chiffre[24]);
+ListeM init_M();
+ListeC init_C();
+ListeM remplir_liste_M();
+ListeC remplir_liste_C();

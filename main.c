@@ -32,7 +32,8 @@ int  main (int argc, char *argv[]) {
 /*___________________________________ATTAQUE PAR LE MILIEU___________________________________________*/
     unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    comparaison_listes(message_clair,message_c);
+    ListeM LM=remplir_liste_M();
+    ListeC LC=remplir_liste_C();
 /*__________________________________________________________________________________________________*/
 
     return 0;
