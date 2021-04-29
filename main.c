@@ -1,4 +1,5 @@
 #include "PRESENT24.h"
+#include "attaque.h"
 
 int  main (int argc, char *argv[]) {
 /*________________________________________CHIFFREMENT_____________________________________*/
@@ -20,12 +21,18 @@ int  main (int argc, char *argv[]) {
 
 
 /*_______________________________________DECHIFFREMENT______________________________________________*/
-    char *message_dechiffre=malloc(6*sizeof(char));
+    char *message_dechiffre_hexa=malloc(6*sizeof(char));
     dechiffrement(message,k);
-    bits_to_hexa(message,message_dechiffre);/*on convertit ce message en bits en un message en hexa*/
+    bits_to_hexa(message,message_dechiffre_hexa);/*on convertit ce message en bits en un message en hexa*/
     printf("=\n");
-    printf("message déchiffré = %s\n",message_dechiffre);
+    printf("message déchiffré = %s\n",message_dechiffre_hexa);
     printf("----------------------------\n");
 /*__________________________________________________________________________________________________*/
+
+/*___________________________________ATTAQUE PAR LE MILIEU___________________________________________*/
+    unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    ListeM LM;
+/*__________________________________________________________________________________________________*/
+
     return 0;
 }

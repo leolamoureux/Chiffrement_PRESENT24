@@ -7,11 +7,11 @@ run : clean chiffrer
 	./chiffrer 000000 ffffff
 	./chiffrer f955b9 d1bd2d 
 
-chiffrer : main.o PRESENT24.o dechiffrement.o
-	$(CC) main.o PRESENT24.o dechiffrement.o -o chiffrer
+chiffrer : main.o PRESENT24.o dechiffrement.o attaque.o
+	$(CC) main.o PRESENT24.o dechiffrement.o attaque.o -o chiffrer
 
 
-%.o : %.c PRESENT24.h dechiffrement.h
+%.o : %.c PRESENT24.h dechiffrement.h attaque.h
 	$(CC) -c $<  $( CFLAGS )
 
 valgrind : chiffrer
