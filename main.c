@@ -1,7 +1,13 @@
 #include "PRESENT24.h"
 #include "attaque.h"
+#include <time.h>
 
 int  main (int argc, char *argv[]) {
+/*___________________________________TEMPS EXECUTION_________________________________________*/
+    float temps;
+    clock_t t1, t2;
+
+
 /*________________________________________CHIFFREMENT_____________________________________*/
     printf("----------------------------\n");
     printf("message = %s\n",argv[1]);
@@ -32,8 +38,12 @@ int  main (int argc, char *argv[]) {
 /*___________________________________ATTAQUE PAR LE MILIEU___________________________________________*/
     unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    t1 = clock();
     ListeM LM=remplir_liste_M(message_clair);
     ListeC LC=remplir_liste_C(message_c);
+    t2 = clock();
+    temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    printf("temps pour remplir les listes = %f\n", temps);
 /*__________________________________________________________________________________________________*/
 
     return 0;

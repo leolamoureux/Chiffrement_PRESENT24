@@ -13,7 +13,7 @@ ListeM init_M(){
 ListeC init_C(){
     ListeC LC;
     LC.message[24]=malloc(16777216*sizeof(int));
-    LC.cle[24]==malloc(16777216*sizeof(int));
+    LC.cle[24]=malloc(16777216*sizeof(int));
     return LC;
 }
 
@@ -21,7 +21,7 @@ ListeM remplir_liste_M(unsigned int message[24]){
     ListeM LM=init_M();
     unsigned int tab[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int iter;   
-    for(int a=0;a<5;a++){
+    for(int a=0;a<30;a++){
         iter=a;
         /*on convertit l'iteration en bits*/
         for(int i=0;iter>0;i++){  
@@ -39,7 +39,7 @@ ListeC remplir_liste_C(unsigned int message[24]){
     ListeC LC=init_C();
     unsigned int tab[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int iter;   
-    for(int a=0;a<5;a++){
+    for(int a=0;a<30;a++){
         iter=a;
         /*on convertit l'iteration en bits*/
         for(int i=0;iter>0;i++){  
