@@ -6,7 +6,7 @@ run : clean chiffrer
 
 
 chiffrer : main.o PRESENT24.o dechiffrement.o attaque.o
-	$(CC) main.o PRESENT24.o dechiffrement.o attaque.o -lpthread -o chiffrer
+	$(CC) main.o PRESENT24.o dechiffrement.o attaque.o -O3 -o chiffrer
 
 
 %.o : %.c PRESENT24.h dechiffrement.h attaque.h

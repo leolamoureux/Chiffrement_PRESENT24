@@ -20,8 +20,7 @@ ListeM remplir_liste_M(unsigned int message[24]){
     ListeM LM=init_M();
     unsigned int tab[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int iter;   
-    for(int a=0;a<16777216;a++){
-        printf("%d\n",a);
+    for(int a=0;a<5;a++){
         iter=a;
         /*on convertit l'iteration en bits*/
         for(int i=0;iter>0;i++){  
@@ -30,8 +29,13 @@ ListeM remplir_liste_M(unsigned int message[24]){
         }
         LM.message[a]=message;
         LM.cle[a]=tab;/*clé stockée dans la liste M*/
-        CLES K=cadencement(LM.cle[a]);/*cadencement avec la clé a l'iteration a*/
-        chiffrement(LM.message[a],K);/*resultat du chiffrement stocké dans la liste M*/
+        printf("\n");
+        for(int i=0;i<24;i++){
+            printf("%d",LM.cle[a][i]);
+        }
+        printf("\n");
+        //CLES K=cadencement(LM.cle[a]);/*cadencement avec la clé a l'iteration a*/
+       // chiffrement(LM.message[a],K);/*resultat du chiffrement stocké dans la liste M*/
     }
     return LM;
 }

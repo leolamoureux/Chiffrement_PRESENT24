@@ -18,3 +18,4 @@ ListeM init_M();
 ListeC init_C();
 ListeM remplir_liste_M(unsigned int message[24]);
 ListeC remplir_liste_C(unsigned int message[24]);
+

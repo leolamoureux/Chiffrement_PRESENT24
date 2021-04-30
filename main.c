@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
+#define NBTHREADS 5
 
 int  main (int argc, char *argv[]) {
 /*___________________________________TEMPS EXECUTION_________________________________________*/
@@ -44,30 +45,14 @@ int  main (int argc, char *argv[]) {
     unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     
-
-    //ListeM LM=remplir_liste_M(message_clair);
-    //ListeC LC=remplir_liste_C(message_c);
-    
-/*__________________________________________________________________________________________________*/
-
-/*_______________________________________THREADS_______________________________________________*/
-    void * workerThreadFunc(void * tid){
-         long * myID = (long *) tid;
-         printf("thread n*%ld\n",*myID);
-         ListeM LM=remplir_liste_M(message_clair);
-    };
-
-    pthread_t tid0,tid1,tid2,tid3,tid4,tid5,tid6,tid7,tid8,tid9,tid10,tid11,tid12,tid13,tid14,tid15;
-    pthread_t *pthreads[]={&tid0, &tid1, &tid2, &tid3, &tid4, &tid5, &tid6,
-                           &tid7, &tid8, &tid9, &tid10, &tid11, &tid12, &tid13, &tid14, &tid15};
     t1 = clock();
-    for (int i=0;i<16;i++){
-        pthread_create(pthreads[i],NULL,workerThreadFunc,(void *) pthreads[i]);
-    }
+
+    ListeM LM=remplir_liste_M(message_clair);
+    //ListeC LC=remplir_liste_C(message_c);
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temps pour remplir les listes = %f\n", temps);
 /*_________________________________________________________________________________________________*/
-    pthread_exit(NULL);
+
     return 0;
 }
