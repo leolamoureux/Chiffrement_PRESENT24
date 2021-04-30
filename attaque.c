@@ -1,24 +1,18 @@
 #include "attaque.h"
-#include <pthread.h>
 #include "PRESENT24.h"
 /*2^24=16777216*/
 
-/*fonction pour le thread*/
-
-/////////////////////////////////////////////////
-
-
 ListeM init_M(){
     ListeM LM;
-    LM.message=(int**)malloc(16777216*sizeof(int*));
-    LM.cle=(int**)malloc(16777216*sizeof(int*));
+    LM.message=malloc(16777216*sizeof(int*));
+    LM.cle=malloc(16777216*sizeof(int*));
     return LM;
 }
 
 ListeC init_C(){
     ListeC LC;
-    LC.message=(int**)malloc(16777216*sizeof(int*));
-    LC.cle=(int**)malloc(16777216*sizeof(int*));
+    LC.message=malloc(16777216*sizeof(int*));
+    LC.cle=malloc(16777216*sizeof(int*));
     return LC;
 }
 
@@ -26,7 +20,8 @@ ListeM remplir_liste_M(unsigned int message[24]){
     ListeM LM=init_M();
     unsigned int tab[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int iter;   
-    for(int a=0;a<2;a++){
+    for(int a=0;a<16777216;a++){
+        printf("%d\n",a);
         iter=a;
         /*on convertit l'iteration en bits*/
         for(int i=0;iter>0;i++){  

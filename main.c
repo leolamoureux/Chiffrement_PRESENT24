@@ -1,14 +1,13 @@
 #include "PRESENT24.h"
 #include "attaque.h"
 #include <pthread.h>
+#include <unistd.h>
 #include <time.h>
 
 int  main (int argc, char *argv[]) {
 /*___________________________________TEMPS EXECUTION_________________________________________*/
     float temps;
     clock_t t1, t2;
-
-
 /*________________________________________CHIFFREMENT_____________________________________*/
     printf("----------------------------\n");
     printf("message = %s\n",argv[1]);
@@ -36,17 +35,39 @@ int  main (int argc, char *argv[]) {
     printf("----------------------------\n");
 /*__________________________________________________________________________________________________*/
 
+
+
+
+
+
 /*___________________________________ATTAQUE PAR LE MILIEU___________________________________________*/
     unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    t1 = clock();
+    
 
-    ListeM LM=remplir_liste_M(message_clair);
-    ListeC LC=remplir_liste_C(message_c);
+    //ListeM LM=remplir_liste_M(message_clair);
+    //ListeC LC=remplir_liste_C(message_c);
+    
+/*__________________________________________________________________________________________________*/
+
+/*_______________________________________THREADS_______________________________________________*/
+    void * workerThreadFunc(void * tid){
+         long * myID = (long *) tid;
+         printf("thread n*%ld\n",*myID);
+         ListeM LM=remplir_liste_M(message_clair);
+    };
+
+    pthread_t tid0,tid1,tid2,tid3,tid4,tid5,tid6,tid7,tid8,tid9,tid10,tid11,tid12,tid13,tid14,tid15;
+    pthread_t *pthreads[]={&tid0, &tid1, &tid2, &tid3, &tid4, &tid5, &tid6,
+                           &tid7, &tid8, &tid9, &tid10, &tid11, &tid12, &tid13, &tid14, &tid15};
+    t1 = clock();
+    for (int i=0;i<16;i++){
+        pthread_create(pthreads[i],NULL,workerThreadFunc,(void *) pthreads[i]);
+    }
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temps pour remplir les listes = %f\n", temps);
-/*__________________________________________________________________________________________________*/
-
+/*_________________________________________________________________________________________________*/
+    pthread_exit(NULL);
     return 0;
 }
