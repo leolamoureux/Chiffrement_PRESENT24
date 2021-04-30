@@ -1,4 +1,5 @@
 #include "PRESENT24.h"
+#include <time.h>
 ///////__________________dictionnaires__________________________///////////
 
 unsigned int bits_tab[16][4]={{0,0,0,0},//0
@@ -94,8 +95,9 @@ void rotation(unsigned int tab[80]){
     tab[0] = tmp;
 }
 
-
 CLES cadencement(unsigned int cle[24]){
+    float temps2;
+    clock_t t3, t4;
     CLES cles;
     unsigned int regTemp[80];
     for(int i=79;i>=56;i--){
@@ -104,12 +106,13 @@ CLES cadencement(unsigned int cle[24]){
     for(int i=55;i>=0;i--){
         regTemp[i]=0;     /*  les 56 bits restants initialisés à 0         */
     }
-          /*ALGORITHME*/
+          /*ALGORITHME*/t3=clock();
 //////////////////////////////*boucle des 11 clés*/////////////////////////////
     for(int tour=1;tour<=11;tour++){/* tours de l'algo                 */
         for(int i=39;i>=16;i--){
             cles.K[tour-1][39-i]=regTemp[i];/*  constitution de la sous clé Ki-1(de 0 à 10)  */
         }
+        
         ///////////////////*étape 1 : pivot de 61 positions*///////////////////
         unsigned int save[80]; 
         for(int i=0;i<80;i++){
@@ -120,7 +123,7 @@ CLES cadencement(unsigned int cle[24]){
             rotation(regTemp);/*61 décalage de 1 position*/
         }
         //////////////////////////////////////////////////////////////////////
-
+        
         /////*étape 2 : application boite_S aux 4 bits les plus a gauche*/////
         int bits_4_gauche[4];
         for(int i=0;i<4;i++){
@@ -143,7 +146,10 @@ CLES cadencement(unsigned int cle[24]){
         }
         //////////////////////////////////////////////////////////////////////
     }
+    t4=clock();
 //////////////////////////////////////////////////////////////////////////////
+    temps2 = (float)(t4-t3)/CLOCKS_PER_SEC;
+    printf("temps = %f\n", temps2);
     return cles;
 }
 

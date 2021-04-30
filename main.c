@@ -48,7 +48,7 @@ int  main (int argc, char *argv[]) {
     t1 = clock();
 
     ListeM LM=remplir_liste_M(message_clair);
-    //ListeC LC=remplir_liste_C(message_c);
+    ListeC LC=remplir_liste_C(message_c);
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temps pour remplir les listes = %f\n", temps);

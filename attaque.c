@@ -29,13 +29,8 @@ ListeM remplir_liste_M(unsigned int message[24]){
         }
         LM.message[a]=message;
         LM.cle[a]=tab;/*clé stockée dans la liste M*/
-        printf("\n");
-        for(int i=0;i<24;i++){
-            printf("%d",LM.cle[a][i]);
-        }
-        printf("\n");
-        //CLES K=cadencement(LM.cle[a]);/*cadencement avec la clé a l'iteration a*/
-       // chiffrement(LM.message[a],K);/*resultat du chiffrement stocké dans la liste M*/
+        CLES K=cadencement(LM.cle[a]);/*cadencement avec la clé a l'iteration a*/
+        chiffrement(LM.message[a],K);/*resultat du chiffrement stocké dans la liste M*/
     }
     return LM;
 }
