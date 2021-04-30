@@ -1,5 +1,6 @@
 #include "PRESENT24.h"
 #include "attaque.h"
+#include <pthread.h>
 #include <time.h>
 
 int  main (int argc, char *argv[]) {
@@ -39,6 +40,7 @@ int  main (int argc, char *argv[]) {
     unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     t1 = clock();
+
     ListeM LM=remplir_liste_M(message_clair);
     ListeC LC=remplir_liste_C(message_c);
     t2 = clock();

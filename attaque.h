@@ -4,13 +4,13 @@
 #include  <math.h>
 
 typedef struct ListeM{
-    unsigned int *message[24];
-    unsigned int *cle[24];
+    unsigned int **message;
+    unsigned int **cle;
 }ListeM;
 
 typedef struct ListeC{
-    unsigned int *message[24];
-    unsigned int *cle[24];
+    unsigned int **message;
+    unsigned int **cle;
 }ListeC;
 
 /*fonctions*/
