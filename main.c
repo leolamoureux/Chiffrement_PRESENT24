@@ -4,6 +4,7 @@
 #include <time.h>
 
 
+
 int  main (int argc, char *argv[]) {
 /*__________________INITIALISATION_______________________*/
     /*conversion*/
@@ -30,15 +31,16 @@ int  main (int argc, char *argv[]) {
     float temps;
     clock_t t1, t2;
     t1 = clock();
-    int *Liste_M=malloc(16777216*sizeof(int));
-    int *Liste_C=malloc(16777216*sizeof(int));
-
-    remplir_liste_M(message_clair,Liste_M);
-    remplir_liste_C(message_chiffre,Liste_C);
-
+    int m1=0x094f4b8;
+    int c1=0x0bbd3cb;
+    attaque(m1,c1);
+    int res=double_chiffrement(m1,5841527,5855507);
+    printf("res=%x\n",res);
+//5841527
+//5855507
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    printf("temps pour remplir les listes = %f\n", temps);
+    printf("temps pour l'attaque = %f\n", temps);
 /*_____________________________________________________________________*/
 
     return 0;
