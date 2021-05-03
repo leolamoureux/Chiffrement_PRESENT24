@@ -1,58 +1,45 @@
-#include "PRESENT24.h"
+#include "present.h"
 #include "attaque.h"
-#include <pthread.h>
-#include <unistd.h>
+#include <stdint.h>
 #include <time.h>
-#define NBTHREADS 5
+
 
 int  main (int argc, char *argv[]) {
-/*___________________________________TEMPS EXECUTION_________________________________________*/
+/*__________________INITIALISATION_______________________*/
+    /*conversion*/
+    int message_clair=hexa_to_dec(argv[1]);
+    int cle_maitre=hexa_to_dec(argv[2]);
+
+    /*cadencement*/
+    CLES cles=cadencement(cle_maitre);
+/*_______________________________________________________*/
+
+/*____________________CHIFFREMENT_______________________*/
+    int message_chiffre=chiffrement(message_clair,cles);
+    printf("message chiffré = %x\n\n",message_chiffre);
+/*______________________________________________________*/
+
+/*____________________DECHIFFREMENT_______________________________*/
+    int message_dechiffre=dechiffrement(message_chiffre,cles);
+    printf("message déchiffré = %x\n",message_dechiffre);
+    printf("---------------------\n");
+/*________________________________________________________________*/
+
+
+/*_____________________ATTAQUE_______________________________________*/
     float temps;
     clock_t t1, t2;
-/*________________________________________CHIFFREMENT_____________________________________*/
-    printf("----------------------------\n");
-    printf("message = %s\n",argv[1]);
-    printf("clé = %s\n",argv[2]);
-    unsigned int message[24];
-    unsigned int cle[24];
-    hexa_to_bits(argv[1],message);
-    hexa_to_bits(argv[2],cle);
-    char *message_chiffre=malloc(6*sizeof(char));
-    CLES k=cadencement(cle);/*algorithme de cadencement qui donne 11 clés de 24bits en sortie*/
-    chiffrement(message,k);/*on chiffre le message avec les 11 clés*/
-    bits_to_hexa(message,message_chiffre);/*on convertit ce message en bits en un message en hexa*/
-    printf("=\n");
-    printf("message chiffré = %s\n",message_chiffre);
-    printf("----------------------------\n");
-/*___________________________________________________________________________________________*/
-
-
-/*_______________________________________DECHIFFREMENT______________________________________________*/
-    char *message_dechiffre_hexa=malloc(6*sizeof(char));
-    dechiffrement(message,k);
-    bits_to_hexa(message,message_dechiffre_hexa);/*on convertit ce message en bits en un message en hexa*/
-    printf("=\n");
-    printf("message déchiffré = %s\n",message_dechiffre_hexa);
-    printf("----------------------------\n");
-/*__________________________________________________________________________________________________*/
-
-
-
-
-
-
-/*___________________________________ATTAQUE PAR LE MILIEU___________________________________________*/
-    unsigned int message_clair[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    unsigned int message_c[24]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    
     t1 = clock();
+    int *Liste_M=malloc(16777216*sizeof(int));
+    int *Liste_C=malloc(16777216*sizeof(int));
 
-    ListeM LM=remplir_liste_M(message_clair);
-    ListeC LC=remplir_liste_C(message_c);
+    remplir_liste_M(message_clair,Liste_M);
+    remplir_liste_C(message_chiffre,Liste_C);
+
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temps pour remplir les listes = %f\n", temps);
-/*_________________________________________________________________________________________________*/
+/*_____________________________________________________________________*/
 
     return 0;
 }

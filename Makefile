@@ -1,19 +1,18 @@
 CFLAGS = -Wall -g
 CC = gcc
 
-run : clean chiffrer
-	./chiffrer 000000 000000
+run : clean exe
+	./exe f955b9 d1bd2d 
+
+exe : main.o present.o attaque.o dechiffrement.o
+	$(CC) main.o present.o attaque.o dechiffrement.o -lm -O3 -o exe
 
 
-chiffrer : main.o PRESENT24.o dechiffrement.o attaque.o
-	$(CC) main.o PRESENT24.o dechiffrement.o attaque.o -O3 -o chiffrer
-
-
-%.o : %.c PRESENT24.h dechiffrement.h attaque.h
+%.o : %.c present.h attaque.h dechiffrement.h
 	$(CC) -c $<  $( CFLAGS )
 
-valgrind : chiffrer
-	valgrind --leak-check = full ./chiffrer 000000
+valgrind : exe
+	valgrind --leak-check = full ./exe 000000
 
 clean :
 	rm -f *.o
