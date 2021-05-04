@@ -35,7 +35,7 @@ int  main (int argc, char *argv[]) {
 
     (m1,c1) = (c92a8e, 49e0f7)---(m2,c2) = (f1f410,391c18)
     
-    couples LOLA :
+            couples pour l'attaque de Lola Pires-Pinto  :
 
     (m1,c1) = (94f4b8, bbd3cb) (m2,c2) = (111ef1,8773b3) */
 
@@ -44,6 +44,7 @@ int  main (int argc, char *argv[]) {
 
     printf("attaque (m1=%x,c1=%x / m2=%x,c2=%x) : \n",m1,c1,m2,c2);
     attaque(m1,c1,m2,c2);
+
 
     t2=clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
