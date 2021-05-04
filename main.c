@@ -44,8 +44,7 @@ int  main (int argc, char *argv[]) {
 
     printf("attaque (m1=%x,c1=%x / m2=%x,c2=%x) : \n",m1,c1,m2,c2);
     attaque(m1,c1,m2,c2);
-
-
+      
     t2=clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("temps total pour l'attaque = %f s\n", temps);

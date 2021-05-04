@@ -54,7 +54,6 @@ void quicksort(unsigned long long *number,int first,int last){
 }
 
 void compare_tab(unsigned long long *tab1, unsigned long long *tab2,unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
-    printf("\n entrer dans comparaison");
     int n1 = TAILLE;
     int message_obtenu1,message_obtenu2, clee1, clee2;
   
@@ -114,6 +113,7 @@ void attaque(unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
 
 /*____________ELEMENTS_COMMUNS_________________________*/
     compare_tab(Liste_M,Liste_C,m1,c1,m2,c2);
+    
     t4=clock();
     temps = (float)(t4-t3)/CLOCKS_PER_SEC;
     printf("temps pour trouver les clés = %f s\n", temps);

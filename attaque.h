@@ -2,6 +2,8 @@
 #include  <stdio.h>
 #include  <string.h>
 
+/*tableaux qui stockeront les listes, de taille unsigned long long car on stockera
+message + clé dans chaque case, donc besoin de  > 48 bits */
 unsigned long long *Liste_M;
 unsigned long long *Liste_C;
 
