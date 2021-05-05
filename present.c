@@ -1,13 +1,13 @@
 #include "present.h"
 #include <stdint.h>
-
+/*dictionnaires utilisés pour les opérations*/
 static const int sbox[16]={0x0c, 0x05, 0x06, 0x0b, 0x09, 0x00, 
                             0x0a, 0x0d, 0x03, 0x0e, 0x0f, 0x08, 
                             0x04, 0x07, 0x01, 0x02 };
 
 static const int pbox[24]={0,6,12,18,1,7,13,19,2,8,14,20,3,9,15,21,4,10,16,22,5,11,17,23};
 
-
+/*fonction pour convertir une chaine de caractère représentant un entier en hexadécimal, en un entier en décimal*/
 int hexa_to_dec(char *mot){
     int x=0;
     for(int i=strlen(mot)-1;i>=0;i--){
@@ -53,12 +53,13 @@ int permutation(int etat){
 
 
 CLES cadencement(int cle_maitre){
-    uint64_t partie_haute=0;
-    uint64_t partie_basse=0;
-    uint64_t temp=0;
-    uint64_t temp_box=0;
-    CLES cles;
-    partie_haute |= ((uint64_t)cle_maitre) << 40;
+    uint64_t partie_haute=0;/*stockage des 64 bits les plus a gauche de la clé de 80 bits*/
+    uint64_t partie_basse=0;/*stockage des 16 bits les plus a droite de la clé de 80 bits*/
+    uint64_t temp=0;/*variable tampon pour les opérations de pivot*/
+    uint64_t temp_box=0;/*variable tempon pour les opération avec la sbox*/
+    CLES cles;/*structure pour stocker les 11 clés*/
+
+    partie_haute |= ((uint64_t)cle_maitre) << 40;/*on met les 24 bits de la clé maitre tout a gauche de la clé de 80bits*/
 
     for(int i=0;i<11;i++){
 
@@ -92,15 +93,16 @@ CLES cadencement(int cle_maitre){
     return cles;
 }
 
+/*fonctio de chiffrement selon l'algorithme donné*/
 int chiffrement(int message_clair,CLES cles){
     int etat=message_clair;
 
     for(int i=1;i<=10;i++){
-        etat ^= cles.K[i-1];
-        etat=substitution(etat);
-        etat=permutation(etat);
+        etat ^= cles.K[i-1]; /*Etat ← Etat ⊕ Ki*/
+        etat=substitution(etat);/*Etat ← Substitution(Etat)*/
+        etat=permutation(etat);/*Etat ← Permutation(Etat)*/
     }
-    etat ^= cles.K[10];
+    etat ^= cles.K[10];/*Etat ← Etat ⊕ K11*/
     return etat;
 }
 
