@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <time.h>
 
+/*TAILLE = 2^24 */
 #define TAILLE 16777216
 
 
@@ -54,6 +55,8 @@ void quicksort(unsigned long long *number,int first,int last){
 }
 
 void compare_tab(unsigned long long *tab1, unsigned long long *tab2,unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
+    clock_t t1, t2; float temps;
+    t1=clock();
     int n1 = TAILLE;
     int message_obtenu1,message_obtenu2, clee1, clee2;
     int nb_elements=0;
@@ -72,14 +75,17 @@ void compare_tab(unsigned long long *tab1, unsigned long long *tab2,unsigned int
             message_obtenu2 = double_chiffrement(m2,clee1,clee2);
             if ((message_obtenu1 == c1) && (message_obtenu2 == c2)){
                 printf("attaque réussie : \n");
-                printf("nombre de collisions testées avant de trouver la bonne clée : %d\n",nb_elements);
                 printf("clée k1 = %x, clée k2 = %x\n",clee1,clee2);
-                return;
+                t2=clock();
+                temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+                printf("temps pour trouver les clés = %f s\n-------------------\n", temps);
+                t1=clock();
             }
             i++;
             j++;
         }   
     } 
+    printf("nombre de collisions total: %d\n",nb_elements);
 }
 
 unsigned int double_chiffrement(unsigned int message_clair,unsigned int cle1,unsigned int cle2){
@@ -115,11 +121,11 @@ void attaque(unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
     printf("temps pour trier les listes = %f s\n", temps);
 /*_______________________________________________*/
 
-/*____________ELEMENTS_COMMUNS_________________________*/
+/*____________ELEMENTS_COMMUNS_ET_CLES_________________*/
     compare_tab(Liste_M,Liste_C,m1,c1,m2,c2);
 
     t4=clock();
     temps = (float)(t4-t3)/CLOCKS_PER_SEC;
-    printf("temps pour trouver les clés = %f s\n", temps);
+    printf("temps pour trouver le nombre total de collisions = %f s\n", temps);
 /*____________________________________________________*/
 }
