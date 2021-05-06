@@ -56,20 +56,24 @@ void quicksort(unsigned long long *number,int first,int last){
 void compare_tab(unsigned long long *tab1, unsigned long long *tab2,unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
     int n1 = TAILLE;
     int message_obtenu1,message_obtenu2, clee1, clee2;
+    int nb_elements=0;
   
     int  i = 0 ,  j = 0; 
   
-    while(i < n1 & j < n1){
+    while((i < n1) && (j < n1)){
         
         if((tab1[i] & 0xffffff000000) < (tab2[j] & 0xffffff000000)) i++;
         else if((tab1[i] & 0xffffff000000) > (tab2[j] & 0xffffff000000)) j++;
         else{
+            nb_elements +=1;
             clee1 = tab1[i] & 0x0ffffff;
             clee2 = tab2[j] & 0x0ffffff;
             message_obtenu1 = double_chiffrement(m1,clee1,clee2);
             message_obtenu2 = double_chiffrement(m2,clee1,clee2);
             if ((message_obtenu1 == c1) && (message_obtenu2 == c2)){
-                printf("\n K1 = %d,K2 = %d\n",clee1,clee2);
+                printf("attaque réussie : \n");
+                printf("nombre de collisions testées avant de trouver la bonne clée : %d\n",nb_elements);
+                printf("clée k1 = %x, clée k2 = %x\n",clee1,clee2);
                 return;
             }
             i++;
@@ -113,7 +117,7 @@ void attaque(unsigned int m1,unsigned int c1,unsigned int m2,unsigned int c2){
 
 /*____________ELEMENTS_COMMUNS_________________________*/
     compare_tab(Liste_M,Liste_C,m1,c1,m2,c2);
-    
+
     t4=clock();
     temps = (float)(t4-t3)/CLOCKS_PER_SEC;
     printf("temps pour trouver les clés = %f s\n", temps);

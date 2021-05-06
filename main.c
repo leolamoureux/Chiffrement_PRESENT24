@@ -17,7 +17,7 @@ int  main (int argc, char *argv[]) {
 
 /*____________________CHIFFREMENT_______________________*/
     int message_chiffre=chiffrement(message_clair,cles);
-    printf("message chiffré = %x\n\n",message_chiffre);
+    printf("message chiffré = %x\n",message_chiffre);
 /*______________________________________________________*/
 
 /*____________________DECHIFFREMENT_______________________________*/
